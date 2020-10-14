@@ -1,4 +1,4 @@
-# React Nhost
+# Nhost React Auth
 
 Make it easy to use Nhost with React and Auth.
 
