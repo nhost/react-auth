@@ -74,3 +74,99 @@ export MyComponent() {
   );
 }
 ```
+
+## Protected Routes
+
+### React Router
+
+`src/components/privateroute.jsx`
+
+```jsx
+export function AuthGate({ children, ...rest }) {
+  const { signedIn } = useAuth();
+
+  if (signedIn === null) {
+    return <div>Loading...</div>;
+  }
+
+  if (!signedIn) {
+    return <Redirect to="/login" />;
+  }
+
+  // user is logged in
+  return children;
+}
+```
+
+#### Usage
+
+```jsx
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import { AuthGate } from "components/auth-gate";
+
+<Router>
+  <Switch>
+    /* Unprotected routes */
+    <Route exact path="/register">
+      <Register />
+    </Route>
+    <Route exact path="/login">
+      <Login />
+    </Route>
+  </Switch>
+  /* Protected routes */
+  <AuthGate>
+    <Switch>
+      <Route exact path="/">
+        <Dashboard />
+      </Route>
+      <Route exact path="/settings">
+        <Settings />
+      </Route>
+    </Switch>
+  </AuthGate>
+</Router>;
+```
+
+---
+
+### NextJS
+
+`components/privateroute.jsx`
+
+```jsx
+import { useAuth } from "react-nhost";
+
+export function privateRoute(Component) {
+  return () => {
+    const { signedIn } = useAuth();
+
+    // wait to see if the user is logged in or not.
+    if (signedIn === null) {
+      return <div>Checking auth...</div>;
+    }
+
+    if (!signedIn) {
+      return <div>Login form or redirect to `/login`.</div>;
+    }
+
+    return <Component {...arguments} />;
+  };
+}
+```
+
+#### Usage
+
+`pages/dashboard.jsx`
+
+```jsx
+import React from "react";
+import { protectRoute } from "components/privateroute.jsx";
+
+function Dashboard(props) {
+  return <div>My dashboard</div>;
+}
+
+export default privateRoute(Dashboard);
+```
