@@ -1,38 +1,20 @@
-export const AuthContext = createContext({ signedIn: null });
+import React, { createContext, useState, useEffect } from 'react'
+export const AuthContext = createContext({ signedIn: null })
 
-export class NhostAuthProvider extends React.Component {
-  constructor(props) {
-    super(props);
+export function NhostAuthProvider({ auth, children }) {
+  const [signedIn, setSignedIn] = useState(auth.isAuthenticated())
+  useEffect(() => {
+    auth.onAuthStateChanged((data) => {
+      setSignedIn(data)
+    })
+  }, [auth.onAuthStateChanged])
 
-    this.state = {
-      signedIn: props.auth.isAuthenticated(),
-    };
-
-    props.auth.onAuthStateChanged((data) => {
-      if (this.is_mounted) {
-        this.setState({ signedIn: data });
-      }
-    });
-  }
-
-  componentDidMount() {
-    this.is_mounted = true;
-  }
-
-  componentWillUnmount() {
-    this.is_mounted = false;
-  }
-
-  render() {
-    return (
-      <AuthContext.Provider value={{ signedIn: this.state.signedIn }}>
-        {this.props.children}
-      </AuthContext.Provider>
-    );
-  }
+  return (
+    <AuthContext.Provider value={{ signedIn }}>{children}</AuthContext.Provider>
+  )
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  return context;
+  const context = useContext(AuthContext)
+  return context
 }
