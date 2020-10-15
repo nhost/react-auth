@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 export const AuthContext = createContext({ signedIn: null })
 
 export function NhostAuthProvider({ auth, children }) {
