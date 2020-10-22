@@ -1,3 +1,5 @@
+import React, { createContext, useContext } from "react";
+
 export const AuthContext = createContext({ signedIn: null });
 
 export class NhostAuthProvider extends React.Component {
