@@ -29,8 +29,8 @@
     "@babel/preset-react": "^7.10.4"
   },
   "peerDependencies": {
-    "react": "^16.6.1",
-    "react-dom": "^16.6.3"
+    "react": "^16.6.1 || ^17.0.0",
+    "react-dom": "^16.6.3 || ^17.0.0"
   },
   "dependencies": {},
   "publishConfig": {
