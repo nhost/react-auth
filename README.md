@@ -82,6 +82,10 @@ export MyComponent() {
 `src/components/privateroute.jsx`
 
 ```jsx
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { useAuth } from "@nhost/react-auth";
+
 export function AuthGate({ children, ...rest }) {
   const { signedIn } = useAuth();
 
@@ -136,9 +140,10 @@ import { AuthGate } from "components/auth-gate";
 `components/privateroute.jsx`
 
 ```jsx
-import { useAuth } from "react-nhost";
+import React from "react";
+import { useAuth } from "@nhost/react-auth";
 
-export function privateRoute(Component) {
+export function PrivateRoute(Component) {
   return () => {
     const { signedIn } = useAuth();
 
@@ -162,11 +167,11 @@ export function privateRoute(Component) {
 
 ```jsx
 import React from "react";
-import { protectRoute } from "components/privateroute.jsx";
+import { PrivateRoute } from "components/private-route.jsx";
 
 function Dashboard(props) {
   return <div>My dashboard</div>;
 }
 
-export default privateRoute(Dashboard);
+export default PrivateRoute(Dashboard);
 ```
