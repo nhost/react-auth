@@ -9,7 +9,7 @@ Make it easy to use Nhost with React and Auth.
 ## Install
 
 ```bash
-npm install @nhsot/react-auth
+npm install @nhost/react-auth
 ```
 
 ### Create React App
