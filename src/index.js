@@ -6,23 +6,19 @@ export class NhostAuthProvider extends React.Component {
   constructor(props) {
     super(props);
 
+    this.unsubscribe = null;
+
     this.state = {
       signedIn: props.auth.isAuthenticated(),
     };
 
-    props.auth.onAuthStateChanged((data) => {
-      if (this.is_mounted) {
-        this.setState({ signedIn: data });
-      }
+    this.unsubscribe = props.auth.onAuthStateChanged((authenticated) => {
+        this.setState({ signedIn: authenticated });
     });
   }
 
-  componentDidMount() {
-    this.is_mounted = true;
-  }
-
   componentWillUnmount() {
-    this.is_mounted = false;
+    this.unsubscribe();
   }
 
   render() {
