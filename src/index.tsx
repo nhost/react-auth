@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
 } from 'react';
+import { NhostClient } from '@nhost/nhost-js';
 
 export const AuthContext = createContext({
   user: null,
@@ -17,7 +18,7 @@ export function NhostAuthProvider({
   nhost,
 }: {
   children: ReactNode;
-  nhost: any;
+  nhost: NhostClient;
 }) {
   const [authContext, setAuthContext] = useState({
     user: null,
