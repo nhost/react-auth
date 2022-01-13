@@ -12,4 +12,4 @@ or
 
 ## Documentation
 
-[https://docs.nhost.io/libraries/react-auth](https://docs.nhost.io/libraries/react-auth)
+[https://docs.nhost.io/reference/supporting-libraries/react-auth](https://docs.nhost.io/reference/supporting-libraries/react-auth)
