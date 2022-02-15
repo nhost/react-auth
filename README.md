@@ -1,3 +1,9 @@
+# Disclaimer
+
+This package is now part of our [monorepo](https://github.com/nhost/nhost)
+
+------
+
 # Nhost React Auth
 
 For easy usage of Auth with [Nhost](https://nhost.io).
